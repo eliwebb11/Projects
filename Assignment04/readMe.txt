@@ -1,421 +1,102 @@
-Ran on server csx2
+# Producer-Consumer with Deadlock Demo
 
-	ssh onto csx
-	in the terminal enter
-	gcc assignment04_webb_eli.c -o assignment
-	then ran with
-	./assignment
+---
 
-ewebb11@csx2:~$ gcc -pthread assignment04_webb_eli.c -o assignment
-ewebb11@csx2:~$ ./assignment
-Usage: ./assignment [--partA | --deadlock | --fixed]
-ewebb11@csx2:~$ ./assignment --partA
-[Producer 1] produced item 1000 -> buffer now has 1 item(s)
-[Producer 2] produced item 2000 -> buffer now has 2 item(s)
-[Consumer 2] consumed item 1000 -> buffer now has 1 item(s)
-[Consumer 1] consumed item 2000 -> buffer now has 0 item(s)
-[Producer 2] produced item 2001 -> buffer now has 1 item(s)
-[Consumer 2] consumed item 2001 -> buffer now has 0 item(s)
-[Producer 1] produced item 1001 -> buffer now has 1 item(s)
-[Consumer 1] consumed item 1001 -> buffer now has 0 item(s)
-[Producer 1] produced item 1002 -> buffer now has 1 item(s)
-[Consumer 2] consumed item 1002 -> buffer now has 0 item(s)
-[Producer 2] produced item 2002 -> buffer now has 1 item(s)
-[Producer 1] produced item 1003 -> buffer now has 2 item(s)
-[Producer 2] produced item 2003 -> buffer now has 3 item(s)
-[Consumer 1] consumed item 2002 -> buffer now has 2 item(s)
-[Consumer 2] consumed item 1003 -> buffer now has 1 item(s)
-[Producer 1] produced item 1004 -> buffer now has 2 item(s)
-[Consumer 1] consumed item 2003 -> buffer now has 1 item(s)
-[Producer 2] produced item 2004 -> buffer now has 2 item(s)
-[Producer 1] produced item 1005 -> buffer now has 3 item(s)
-[Consumer 2] consumed item 1004 -> buffer now has 2 item(s)
-[Producer 2] produced item 2005 -> buffer now has 3 item(s)
-[Consumer 1] consumed item 2004 -> buffer now has 2 item(s)
-[Producer 1] produced item 1006 -> buffer now has 3 item(s)
-[Producer 1] produced item 1007 -> buffer now has 4 item(s)
-[Producer 2] produced item 2006 -> buffer now has 5 item(s)
-[Producer 1] produced item 1008 -> buffer now has 6 item(s)
-[Consumer 1] consumed item 1005 -> buffer now has 5 item(s)
-[Consumer 2] consumed item 2005 -> buffer now has 4 item(s)
-[Producer 2] produced item 2007 -> buffer now has 5 item(s)
-[Producer 1] produced item 1009 -> buffer now has 6 item(s)
-[Producer 2] produced item 2008 -> buffer now has 7 item(s)
-[Producer 1] produced item 1010 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1006 -> buffer now has 7 item(s)
-[Consumer 1] consumed item 1007 -> buffer now has 6 item(s)
-[Producer 2] produced item 2009 -> buffer now has 7 item(s)
-[Producer 1] produced item 1011 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2006 -> buffer now has 7 item(s)
-[Producer 2] produced item 2010 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1008 -> buffer now has 7 item(s)
-[Producer 1] produced item 1012 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2007 -> buffer now has 7 item(s)
-[Producer 2] produced item 2011 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1009 -> buffer now has 7 item(s)
-[Producer 1] produced item 1013 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2008 -> buffer now has 7 item(s)
-[Producer 2] produced item 2012 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1010 -> buffer now has 7 item(s)
-[Producer 1] produced item 1014 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2009 -> buffer now has 7 item(s)
-[Producer 2] produced item 2013 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1011 -> buffer now has 7 item(s)
-[Producer 1] produced item 1015 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2010 -> buffer now has 7 item(s)
-[Producer 2] produced item 2014 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1012 -> buffer now has 7 item(s)
-[Producer 1] produced item 1016 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2011 -> buffer now has 7 item(s)
-[Producer 2] produced item 2015 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1013 -> buffer now has 7 item(s)
-[Producer 1] produced item 1017 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2012 -> buffer now has 7 item(s)
-[Producer 1] produced item 1018 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1014 -> buffer now has 7 item(s)
-[Producer 2] produced item 2016 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2013 -> buffer now has 7 item(s)
-[Producer 1] produced item 1019 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1015 -> buffer now has 7 item(s)
-[Producer 2] produced item 2017 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2014 -> buffer now has 7 item(s)
-[Producer 1] produced item 1020 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1016 -> buffer now has 7 item(s)
-[Producer 2] produced item 2018 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2015 -> buffer now has 7 item(s)
-[Producer 1] produced item 1021 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1017 -> buffer now has 7 item(s)
-[Producer 2] produced item 2019 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1018 -> buffer now has 7 item(s)
-[Producer 1] produced item 1022 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2016 -> buffer now has 7 item(s)
-[Producer 2] produced item 2020 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1019 -> buffer now has 7 item(s)
-[Producer 1] produced item 1023 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2017 -> buffer now has 7 item(s)
-[Producer 2] produced item 2021 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1020 -> buffer now has 7 item(s)
-[Producer 1] produced item 1024 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2018 -> buffer now has 7 item(s)
-[Producer 2] produced item 2022 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1021 -> buffer now has 7 item(s)
-[Producer 1] produced item 1025 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2019 -> buffer now has 7 item(s)
-[Producer 2] produced item 2023 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1022 -> buffer now has 7 item(s)
-[Producer 1] produced item 1026 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2020 -> buffer now has 7 item(s)
-[Producer 2] produced item 2024 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1023 -> buffer now has 7 item(s)
-[Producer 1] produced item 1027 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2021 -> buffer now has 7 item(s)
-[Producer 2] produced item 2025 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1024 -> buffer now has 7 item(s)
-[Producer 1] produced item 1028 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2022 -> buffer now has 7 item(s)
-[Producer 1] produced item 1029 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1025 -> buffer now has 7 item(s)
-[Producer 2] produced item 2026 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2023 -> buffer now has 7 item(s)
-[Producer 1] produced item 1030 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1026 -> buffer now has 7 item(s)
-[Producer 2] produced item 2027 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2024 -> buffer now has 7 item(s)
-[Producer 2] produced item 2028 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1027 -> buffer now has 7 item(s)
-[Producer 1] produced item 1031 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2025 -> buffer now has 7 item(s)
-[Producer 2] produced item 2029 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1028 -> buffer now has 7 item(s)
-[Producer 1] produced item 1032 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1029 -> buffer now has 7 item(s)
-[Producer 2] produced item 2030 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2026 -> buffer now has 7 item(s)
-[Producer 1] produced item 1033 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1030 -> buffer now has 7 item(s)
-[Producer 2] produced item 2031 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2027 -> buffer now has 7 item(s)
-[Producer 2] produced item 2032 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2028 -> buffer now has 7 item(s)
-[Producer 1] produced item 1034 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1031 -> buffer now has 7 item(s)
-[Producer 2] produced item 2033 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2029 -> buffer now has 7 item(s)
-[Producer 1] produced item 1035 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1032 -> buffer now has 7 item(s)
-[Producer 2] produced item 2034 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2030 -> buffer now has 7 item(s)
-[Producer 1] produced item 1036 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1033 -> buffer now has 7 item(s)
-[Producer 2] produced item 2035 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2031 -> buffer now has 7 item(s)
-[Producer 1] produced item 1037 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2032 -> buffer now has 7 item(s)
-[Producer 2] produced item 2036 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1034 -> buffer now has 7 item(s)
-[Producer 1] produced item 1038 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2033 -> buffer now has 7 item(s)
-[Producer 2] produced item 2037 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1035 -> buffer now has 7 item(s)
-[Producer 1] produced item 1039 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2034 -> buffer now has 7 item(s)
-[Producer 2] produced item 2038 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1036 -> buffer now has 7 item(s)
-[Producer 1] produced item 1040 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2035 -> buffer now has 7 item(s)
-[Producer 2] produced item 2039 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1037 -> buffer now has 7 item(s)
-[Producer 1] produced item 1041 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2036 -> buffer now has 7 item(s)
-[Producer 2] produced item 2040 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1038 -> buffer now has 7 item(s)
-[Producer 1] produced item 1042 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2037 -> buffer now has 7 item(s)
-[Producer 2] produced item 2041 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1039 -> buffer now has 7 item(s)
-[Producer 1] produced item 1043 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2038 -> buffer now has 7 item(s)
-[Producer 2] produced item 2042 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1040 -> buffer now has 7 item(s)
-[Producer 1] produced item 1044 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2039 -> buffer now has 7 item(s)
-[Producer 2] produced item 2043 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1041 -> buffer now has 7 item(s)
-[Producer 1] produced item 1045 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2040 -> buffer now has 7 item(s)
-[Producer 2] produced item 2044 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1042 -> buffer now has 7 item(s)
-[Producer 2] produced item 2045 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2041 -> buffer now has 7 item(s)
-[Producer 1] produced item 1046 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1043 -> buffer now has 7 item(s)
-[Producer 2] produced item 2046 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2042 -> buffer now has 7 item(s)
-[Producer 1] produced item 1047 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1044 -> buffer now has 7 item(s)
-[Producer 2] produced item 2047 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2043 -> buffer now has 7 item(s)
-[Producer 1] produced item 1048 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1045 -> buffer now has 7 item(s)
-[Producer 2] produced item 2048 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2044 -> buffer now has 7 item(s)
-[Producer 1] produced item 1049 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2045 -> buffer now has 7 item(s)
-[Producer 2] produced item 2049 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1046 -> buffer now has 7 item(s)
-[Consumer 1] consumed item 2046 -> buffer now has 6 item(s)
-[Consumer 2] consumed item 1047 -> buffer now has 5 item(s)
-[Consumer 1] consumed item 2047 -> buffer now has 4 item(s)
-[Consumer 2] consumed item 1048 -> buffer now has 3 item(s)
-[Consumer 1] consumed item 2048 -> buffer now has 2 item(s)
-[Consumer 2] consumed item 1049 -> buffer now has 1 item(s)
-[Consumer 1] consumed item 2049 -> buffer now has 0 item(s)
-[Monitor] System healthy: progress observed.
-All producers and consumers have finished. Final buffer count = 0
+## Overview
 
-ewebb11@csx2:~$ ./assignment --deadlock
+A multi-threaded producer-consumer program using circular buffers and POSIX threads in C. The program runs in one of three modes to demonstrate correct synchronization, intentional deadlock, and the fix for that deadlock.
+
+---
+
+## Files
+
+| File | Description |
+|------|-------------|
+| `assignment04_webb_eli.c` | Full source code |
+
+---
+
+## Compilation
+
+```bash
+gcc assignment04_webb_eli.c -o assignment04 -lpthread
+```
+
+---
+
+## Running
+
+The program requires exactly one mode flag:
+
+```bash
+./assignment04 --partA      # Basic producer-consumer
+./assignment04 --deadlock   # Introduces deadlock
+./assignment04 --fixed      # Resolves the deadlock
+```
+
+Shorthand flags `A`, `D`, and `F` also work.
+
+---
+
+## Program Structure
+
+| Component | Count | Description |
+|-----------|-------|-------------|
+| Producers | 2 | Each produces 50 items into the circular buffer |
+| Consumers | 2 | Consume items until all producers are done and buffer is empty |
+| Monitor | 1 | Background thread that checks for stalls every 3 seconds |
+| Buffer | 8 slots | Circular buffer shared between all producers and consumers |
+
+---
+
+## Modes
+
+### `--partA` — Basic Producer-Consumer
+
+Standard producer-consumer synchronization using a single mutex (`buffer_mutex`) and two condition variables (`not_full`, `not_empty`). Producers block when the buffer is full; consumers block when it is empty. No deadlock is possible.
+
+### `--deadlock` — Intentional Deadlock
+
+Two additional mutexes (`mutex_left`, `mutex_right`) are introduced. Even-numbered producers lock left then right; odd-numbered producers lock right then left. This inconsistent ordering creates a circular wait where each producer holds one lock and waits for the other, causing the program to hang.
+
+**All four deadlock conditions are present:**
+
+- **Mutual exclusion** — mutexes can only be held by one thread at a time
+- **Hold and wait** — each producer holds one lock while waiting to acquire the other
+- **No preemption** — locks are not forcibly released; threads must unlock themselves
+- **Circular wait** — Producer 1 holds left and waits for right; Producer 2 holds right and waits for left
+
+### `--fixed` — Deadlock Resolution
+
+Both producers acquire locks in the same consistent order (left then right). This eliminates circular wait — since no two producers can be waiting on each other, deadlock cannot occur.
+
+---
+
+## Monitor Thread
+
+The monitor thread wakes every 3 seconds and checks whether `operations_done` has increased since its last check. If no progress is detected for 6 consecutive seconds (2 checks), it prints a stall warning. This makes deadlock in `--deadlock` mode visible in the output.
+
+```
 [Monitor] Warning: no activity detected for 6 seconds. Possible stall.
+```
 
-ewebb11@csx2:~$ ./assignment --fixed
+---
+
+## Sample Output (`--partA`)
+
+```
 [Producer 1] produced item 1000 -> buffer now has 1 item(s)
 [Consumer 1] consumed item 1000 -> buffer now has 0 item(s)
 [Producer 2] produced item 2000 -> buffer now has 1 item(s)
-[Consumer 2] consumed item 2000 -> buffer now has 0 item(s)
-[Producer 1] produced item 1001 -> buffer now has 1 item(s)
-[Consumer 2] consumed item 1001 -> buffer now has 0 item(s)
-[Producer 2] produced item 2001 -> buffer now has 1 item(s)
-[Producer 1] produced item 1002 -> buffer now has 2 item(s)
-[Consumer 1] consumed item 2001 -> buffer now has 1 item(s)
-[Producer 2] produced item 2002 -> buffer now has 2 item(s)
-[Producer 1] produced item 1003 -> buffer now has 3 item(s)
-[Consumer 2] consumed item 1002 -> buffer now has 2 item(s)
-[Producer 2] produced item 2003 -> buffer now has 3 item(s)
-[Producer 1] produced item 1004 -> buffer now has 4 item(s)
-[Consumer 2] consumed item 2002 -> buffer now has 3 item(s)
-[Consumer 1] consumed item 1003 -> buffer now has 2 item(s)
-[Producer 2] produced item 2004 -> buffer now has 3 item(s)
-[Producer 1] produced item 1005 -> buffer now has 4 item(s)
-[Consumer 2] consumed item 2003 -> buffer now has 3 item(s)
-[Consumer 1] consumed item 1004 -> buffer now has 2 item(s)
-[Producer 2] produced item 2005 -> buffer now has 3 item(s)
-[Producer 1] produced item 1006 -> buffer now has 4 item(s)
-[Producer 2] produced item 2006 -> buffer now has 5 item(s)
-[Consumer 2] consumed item 2004 -> buffer now has 4 item(s)
-[Producer 2] produced item 2007 -> buffer now has 5 item(s)
-[Consumer 1] consumed item 1005 -> buffer now has 4 item(s)
-[Producer 1] produced item 1007 -> buffer now has 5 item(s)
-[Producer 2] produced item 2008 -> buffer now has 6 item(s)
-[Producer 1] produced item 1008 -> buffer now has 7 item(s)
-[Consumer 2] consumed item 2005 -> buffer now has 6 item(s)
-[Consumer 1] consumed item 1006 -> buffer now has 5 item(s)
-[Consumer 2] consumed item 2006 -> buffer now has 4 item(s)
-[Producer 2] produced item 2009 -> buffer now has 5 item(s)
-[Producer 1] produced item 1009 -> buffer now has 6 item(s)
-[Consumer 1] consumed item 2007 -> buffer now has 5 item(s)
-[Producer 1] produced item 1010 -> buffer now has 6 item(s)
-[Producer 2] produced item 2010 -> buffer now has 7 item(s)
-[Producer 1] produced item 1011 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1007 -> buffer now has 7 item(s)
-[Consumer 2] consumed item 2008 -> buffer now has 6 item(s)
-[Producer 2] produced item 2011 -> buffer now has 7 item(s)
-[Producer 1] produced item 1012 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1008 -> buffer now has 7 item(s)
-[Producer 2] produced item 2012 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2009 -> buffer now has 7 item(s)
-[Consumer 2] consumed item 1009 -> buffer now has 6 item(s)
-[Producer 1] produced item 1013 -> buffer now has 7 item(s)
-[Producer 2] produced item 2013 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1010 -> buffer now has 7 item(s)
-[Consumer 1] consumed item 2010 -> buffer now has 6 item(s)
-[Producer 1] produced item 1014 -> buffer now has 7 item(s)
-[Producer 2] produced item 2014 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1011 -> buffer now has 7 item(s)
-[Consumer 1] consumed item 2011 -> buffer now has 6 item(s)
-[Producer 2] produced item 2015 -> buffer now has 7 item(s)
-[Producer 1] produced item 1015 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1012 -> buffer now has 7 item(s)
-[Producer 2] produced item 2016 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2012 -> buffer now has 7 item(s)
-[Producer 1] produced item 1016 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1013 -> buffer now has 7 item(s)
-[Producer 2] produced item 2017 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2013 -> buffer now has 7 item(s)
-[Producer 1] produced item 1017 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1014 -> buffer now has 7 item(s)
-[Producer 2] produced item 2018 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2014 -> buffer now has 7 item(s)
-[Producer 1] produced item 1018 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2015 -> buffer now has 7 item(s)
-[Producer 2] produced item 2019 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1015 -> buffer now has 7 item(s)
-[Producer 1] produced item 1019 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2016 -> buffer now has 7 item(s)
-[Producer 2] produced item 2020 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1016 -> buffer now has 7 item(s)
-[Producer 2] produced item 2021 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2017 -> buffer now has 7 item(s)
-[Producer 1] produced item 1020 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1017 -> buffer now has 7 item(s)
-[Producer 2] produced item 2022 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2018 -> buffer now has 7 item(s)
-[Producer 1] produced item 1021 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1018 -> buffer now has 7 item(s)
-[Producer 2] produced item 2023 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2019 -> buffer now has 7 item(s)
-[Producer 1] produced item 1022 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1019 -> buffer now has 7 item(s)
-[Producer 2] produced item 2024 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2020 -> buffer now has 7 item(s)
-[Producer 1] produced item 1023 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2021 -> buffer now has 7 item(s)
-[Producer 1] produced item 1024 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1020 -> buffer now has 7 item(s)
-[Producer 2] produced item 2025 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2022 -> buffer now has 7 item(s)
-[Producer 1] produced item 1025 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1021 -> buffer now has 7 item(s)
-[Producer 2] produced item 2026 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2023 -> buffer now has 7 item(s)
-[Producer 1] produced item 1026 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1022 -> buffer now has 7 item(s)
-[Producer 2] produced item 2027 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2024 -> buffer now has 7 item(s)
-[Producer 1] produced item 1027 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1023 -> buffer now has 7 item(s)
-[Producer 2] produced item 2028 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1024 -> buffer now has 7 item(s)
-[Producer 1] produced item 1028 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2025 -> buffer now has 7 item(s)
-[Producer 2] produced item 2029 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1025 -> buffer now has 7 item(s)
-[Producer 2] produced item 2030 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2026 -> buffer now has 7 item(s)
-[Producer 1] produced item 1029 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1026 -> buffer now has 7 item(s)
-[Producer 2] produced item 2031 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2027 -> buffer now has 7 item(s)
-[Producer 2] produced item 2032 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1027 -> buffer now has 7 item(s)
-[Producer 1] produced item 1030 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2028 -> buffer now has 7 item(s)
-[Producer 2] produced item 2033 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1028 -> buffer now has 7 item(s)
-[Producer 1] produced item 1031 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2029 -> buffer now has 7 item(s)
-[Producer 2] produced item 2034 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2030 -> buffer now has 7 item(s)
-[Producer 2] produced item 2035 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1029 -> buffer now has 7 item(s)
-[Producer 1] produced item 1032 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2031 -> buffer now has 7 item(s)
-[Producer 2] produced item 2036 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2032 -> buffer now has 7 item(s)
-[Producer 2] produced item 2037 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1030 -> buffer now has 7 item(s)
-[Producer 1] produced item 1033 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2033 -> buffer now has 7 item(s)
-[Producer 2] produced item 2038 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1031 -> buffer now has 7 item(s)
-[Producer 1] produced item 1034 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2034 -> buffer now has 7 item(s)
-[Producer 2] produced item 2039 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2035 -> buffer now has 7 item(s)
-[Producer 1] produced item 1035 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1032 -> buffer now has 7 item(s)
-[Producer 2] produced item 2040 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2036 -> buffer now has 7 item(s)
-[Producer 1] produced item 1036 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2037 -> buffer now has 7 item(s)
-[Producer 2] produced item 2041 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1033 -> buffer now has 7 item(s)
-[Producer 1] produced item 1037 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2038 -> buffer now has 7 item(s)
-[Producer 2] produced item 2042 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1034 -> buffer now has 7 item(s)
-[Producer 1] produced item 1038 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2039 -> buffer now has 7 item(s)
-[Producer 2] produced item 2043 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1035 -> buffer now has 7 item(s)
-[Producer 1] produced item 1039 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2040 -> buffer now has 7 item(s)
-[Producer 1] produced item 1040 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1036 -> buffer now has 7 item(s)
-[Producer 2] produced item 2044 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2041 -> buffer now has 7 item(s)
-[Producer 2] produced item 2045 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1037 -> buffer now has 7 item(s)
-[Producer 1] produced item 1041 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2042 -> buffer now has 7 item(s)
-[Producer 2] produced item 2046 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1038 -> buffer now has 7 item(s)
-[Producer 1] produced item 1042 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 2043 -> buffer now has 7 item(s)
-[Producer 2] produced item 2047 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 1039 -> buffer now has 7 item(s)
-[Producer 1] produced item 1043 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1040 -> buffer now has 7 item(s)
-[Producer 1] produced item 1044 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2044 -> buffer now has 7 item(s)
-[Producer 2] produced item 2048 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2045 -> buffer now has 7 item(s)
-[Producer 2] produced item 2049 -> buffer now has 8 item(s)
-[Consumer 2] consumed item 1041 -> buffer now has 7 item(s)
-[Producer 1] produced item 1045 -> buffer now has 8 item(s)
-[Consumer 1] consumed item 2046 -> buffer now has 7 item(s)
-[Consumer 2] consumed item 1042 -> buffer now has 6 item(s)
-[Producer 1] produced item 1046 -> buffer now has 7 item(s)
-[Consumer 1] consumed item 2047 -> buffer now has 6 item(s)
-[Consumer 2] consumed item 1043 -> buffer now has 5 item(s)
-[Producer 1] produced item 1047 -> buffer now has 6 item(s)
-[Consumer 1] consumed item 1044 -> buffer now has 5 item(s)
-[Consumer 2] consumed item 2048 -> buffer now has 4 item(s)
-[Producer 1] produced item 1048 -> buffer now has 5 item(s)
-[Consumer 1] consumed item 2049 -> buffer now has 4 item(s)
-[Producer 1] produced item 1049 -> buffer now has 5 item(s)
-[Consumer 2] consumed item 1045 -> buffer now has 4 item(s)
-[Consumer 1] consumed item 1046 -> buffer now has 3 item(s)
-[Consumer 2] consumed item 1047 -> buffer now has 2 item(s)
-[Consumer 1] consumed item 1048 -> buffer now has 1 item(s)
-[Consumer 2] consumed item 1049 -> buffer now has 0 item(s)
 [Monitor] System healthy: progress observed.
+...
 All producers and consumers have finished. Final buffer count = 0
+```
+
+---
+
+## Notes
+
+- Compile with `-lpthread` on all platforms
+- The deadlock mode may hang indefinitely — use `Ctrl+C` to terminate
+- Output order is non-deterministic due to thread scheduling
