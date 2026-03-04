@@ -1,4 +1,4 @@
-# CS 3513 — Exercise 1: Error Analysis & Floating Point
+# Error Analysis & Floating Point
 
 ---
 
@@ -78,3 +78,4 @@ Question 3
   Using tolerance 1.00e-12
      Estimate 1/e = 0.36787944117144... with absolute error ...
 ```
+
