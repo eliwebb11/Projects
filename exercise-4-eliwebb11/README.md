@@ -1,4 +1,4 @@
-# CS 3513 — Exercise 4: Applied Root Finding
+# Applied Root Finding
 
 ---
 
@@ -107,3 +107,4 @@ Solution: V = **.**  L
 Method: Newton Raphson
 Initial Value: 12
 ```
+
