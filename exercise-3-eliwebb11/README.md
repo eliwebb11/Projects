@@ -1,34 +1,102 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/fdL3j_Qf)
-# CS 3513 Exercise 3   
+# Root Finding Methods
 
-**Due 2/28/2025**.  Last day to submit with late penalty: 3/14/2025  
+---
 
-## Modify to provide your information.   
+## Overview
 
-* Name :   Eli Webb
-* email :   eli.webb@okstate.edu
-* GitHub user name:   eliwebb11
+This exercise compares numerical root-finding methods from SciPy on two test functions — `bar(t)` and `baz(t)` — across three known root intervals. It also generates plots to visually examine function behavior near roots.
 
-## Instructions  
+---
 
-See exercise3.pdf on canvas or in this repository.
+## Files
 
-Edit the python file exercise3.py to complete the exercise or complete with a paired jupyter notebook.
-To pair a jupyter notebook, do the following (assuming you have install jupytext package).
-- start jupyter notebook in the folder holding the assignment repository, 
-- right click on exercise3.py in file listing and select "Open with" Notebook.
-- this creates exercise3.ipynb that is paired with exercise3.py.  If not, use menu "File->Jupytext->Pair Notebook with ipynb document" to create the pairing. 
-- saving the notebook will also update exercise3.py
-- if you edit the python file while the notebook is open, use the browser page refresh and the changes will be loaded into the notebook.
-- Check your GitHub repository submission by checking the browser view of your repository.  Double check by downloading exercise3.py from your 
-repository to a temporary location and execute it as a python script.
+| File | Description |
+|------|-------------|
+| `exercise3.py` | Main script containing all four questions |
+| `Q3-a-bar.pdf` | Plot of `bar(t)` over [5.0, 9.0] |
+| `Q3-b-baz.pdf` | Plot of `baz(t)` over [5.0, 9.0] |
+| `Q3-c-bar.pdf` | Plot of `bar(t)` over [7.0, 7.5] |
+| `Q3-d-baz.pdf` | Plot of `baz(t)` over [7.0, 7.5] |
 
-**The python file will be graded**, so make sure it is up to date.  Don't forget to add your plots from question 3 to your respository.
+---
 
-## Notes and comments
+## Requirements
 
-## This is a clone of the Base Repository for Programming Exercises and Assignments
+- Python 3
+- NumPy, SciPy, Matplotlib
 
-Contains .gitignore file for python from https://github.com/github/gitignore/blob/main/Python.gitignore
-and for Ms Visual Studio from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore 
+```bash
+pip install numpy scipy matplotlib
+```
 
+---
+
+## Running
+
+```bash
+python exercise3.py
+```
+
+PDF plots are saved to the working directory automatically.
+
+---
+
+## Test Functions
+
+Both functions share roots at approximately `t = 1/3`, `t = 7 + 1/3`, and `t = 1024 - 2/3`, tested over the intervals `(0,1)`, `(7,8)`, and `(1023,1024)`.
+
+- **`bar(t)`** — product of three linear factors times `cos(t/600)`. Simple roots; well-behaved for all methods.
+- **`baz(t)`** — same roots but each factor is cubed, creating triple roots. Methods that rely on sign changes struggle here since the function does not cross zero — it only touches it.
+
+Analytic first derivatives (`diff_bar`, `diff_baz`) are provided for Newton's method.
+
+---
+
+## Question Summaries
+
+### Question 1 — Bisection on `bar(t)`
+
+Applies `scipy.optimize.bisect` to each of the three intervals with tolerance `1e-16`. Prints a table showing convergence, root location, iteration count, and function call count.
+
+### Question 2 — Method Comparison on `bar(t)`
+
+Applies three methods to each interval and compares their efficiency:
+
+| Method | Strategy |
+|--------|----------|
+| `ridder` | Bracketing method using a midpoint trick; faster than bisection |
+| `brentq` | Hybrid of bisection, secant, and inverse quadratic; generally fastest |
+| `newton` | Uses analytic derivative (`diff_bar`); quadratic convergence near the root |
+
+### Question 3 — Plotting
+
+Generates four PDF plots to visually compare `bar` and `baz` over the interval around the middle root (`t ≈ 7.33`):
+
+- Wide view `[5.0, 9.0]` shows the overall shape of the crossing/touch
+- Zoomed view `[7.0, 7.5]` reveals how `baz` merely touches zero (triple root) while `bar` crosses it
+
+### Question 4 — Bisection, Ridder & Brentq on `baz(t)`
+
+Applies the three bracketing methods to the triple-root function `baz`. Since `baz` does not change sign at its roots, standard bracketing methods cannot detect them — convergence behavior and any failures are compared across all three intervals and methods.
+
+---
+
+## Sample Output
+
+```
+CS 3513, Spring 2025
+Exercise 3
+StudentName =  Eli Webb
+GitHub Username =  eliwebb11
+
+Question 1
+method name     converged       root location             number of iterations      number of function calls
+bisect          1               1023.3333333333...        ...                       ...
+
+Question 2
+method name     converged       root location             ...
+ridder          1               0.3333333333...           ...
+brentq          1               0.3333333333...           ...
+newton          1               0.3333333333...           ...
+...
+```
