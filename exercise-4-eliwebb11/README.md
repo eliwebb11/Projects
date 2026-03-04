@@ -1,36 +1,109 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/wSOBLZvs)
-# CS 3513 Exercise 4   
+# CS 3513 — Exercise 4: Applied Root Finding
 
-**Due 3/7/2025**.  Last day to submit with late penalty: 3/21/2025  
+---
 
-## Modify to provide your information.   
+## Overview
 
-* Name : Eli Webb   
-* email : eli.webb@okstate.edu  
-* GitHub user name: eliwebb11  
+This exercise applies root-finding methods to three real-world engineering and physics problems: open-channel hydraulics, pipe bend geometry, and the van der Waals gas equation. Each question plots the equation being solved and finds the root numerically.
 
-## Instructions  
+---
 
-See exercise4.pdf on canvas or in this repository.   
+## Files
 
+| File | Description |
+|------|-------------|
+| `exercise4.py` | Main script containing all three questions |
+| `ex4q1plot.pdf` | Plot of the hydraulic equation for Question 1 |
+| `ex4q2aplot.pdf` | Pipe equation plot for θ = π/2 |
+| `ex4q2bplot.pdf` | Pipe equation plot for θ = 3π/5 |
+| `ex4q2cplot.pdf` | Pipe equation plot for θ = 2π/3 |
+| `ex4q3plot.pdf` | Plot of the van der Waals equation for Question 3 |
 
-You may answer each question in a separate python file or place them all in one script. The questions are phrased
-as if your are creating a separate program for each question, as that is typically what you
-would be doing when writing code to solve a specific problem. Document where each question is answered below. 
-Submit your solution by committing and pushing your code and plot pdf’s to your GitHub Classroom assignment repository. If you use juypter,
-be sure to pair your jupyter notebook with the python file. We will use the python file for
-grading.
+---
 
-- Question 1 is located (file and/or function):  exercise4.py
-- Question 2 is located (file and/or function):  exercise4.py
-- Question 3 is located (file and/or function):  exercise4.py
+## Requirements
 
-**The python file will be graded**, so make sure it is up to date.  Don't forget to add your plots and any newly created python files to your repository.
+- Python 3
+- NumPy, SciPy, Matplotlib
 
-## Notes and comments
+```bash
+pip install numpy scipy matplotlib
+```
 
-## This is a clone of the Base Exercise 3 Repository. modified for Exercise 4
+---
 
-Contains .gitignore file for python from https://github.com/github/gitignore/blob/main/Python.gitignore
-and for Ms Visual Studio from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore 
+## Running
 
+```bash
+python exercise4.py
+```
+
+All PDF plots are saved to the working directory automatically.
+
+---
+
+## Question Summaries
+
+### Question 1 — Open Channel Flow (Brent's Method)
+
+Finds the water level `h` at a bump in a channel using conservation of energy (Bernoulli's equation). Given a flow rate `Q = 1.2 m³/s`, channel width `b = 1.8 m`, upstream water level `h0 = 0.6 m`, and bump height `H = 0.075 m`, the equation solved is:
+
+```
+Q²/(2g·b²·h0²) + h0  =  Q²/(2g·b²·h²) + h + H
+```
+
+**Method:** Brent's method (`scipy.optimize.brentq`) on the interval `[0.4, 0.6]`
+
+---
+
+### Question 2 — Optimal Pipe Bend Angle (fsolve)
+
+Finds the optimal bend angle `α` that minimizes total pipe length `L` connecting two pipe segments of widths `w0 = 10` and `w1 = 8`. The equation balances the angular contributions of both segments:
+
+```
+w0·cos(α)/sin²(α)  =  w1·cos(φ)/sin²(φ)     where φ = π - α - θ
+```
+
+Solved for three joint angles: **θ = π/2, 3π/5, 2π/3**. Total pipe length `L` is reported for each case.
+
+**Method:** `scipy.optimize.fsolve` with initial guess `α = 0.5`
+
+---
+
+### Question 3 — Van der Waals Gas Volume (Newton-Raphson)
+
+Finds the molar volume `V` of a real gas (chloroform) at `P = 2.0 atm` and `T = 313 K` using the van der Waals equation:
+
+```
+(P + a·n²/V²)(V - n·b) = nRT
+```
+
+With constants `a = 6.254198 atm·L²/mol²` and `b = 0.05422 L/mol`.
+
+**Method:** Newton-Raphson (`scipy.optimize.newton`) with initial guess `V = 12 L`
+
+---
+
+## Sample Output
+
+```
+CS 3513, Spring 2025
+Exercise 4
+StudentName =  Eli Webb
+GitHub Username =  eliwebb11
+
+Question 1
+Solution: h = 0.5*** m
+Method: Brent's method
+
+Question 2
+a: Alpha = 0.**** L = **.**
+b: Alpha = 0.**** L = **.**
+c: Alpha = 0.**** L = **.**
+Method: fsolve
+
+Question 3
+Solution: V = **.**  L
+Method: Newton Raphson
+Initial Value: 12
+```
