@@ -1,4 +1,4 @@
-# CS 3513 — Exercise 2: Precision, Derivatives & Cancellation Error
+# Precision, Derivatives & Cancellation Error
 
 ---
 
@@ -86,3 +86,4 @@ Question 3
    methodB's x-intercept is  ...
    methodB is the better formula due to lower cancellation error.
 ```
+
