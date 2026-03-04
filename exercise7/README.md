@@ -1,28 +1,85 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/fAOJPef1)
-# CS 3513 Exercise 7   
+# Numerical Integration
 
-**Due 4/25/2025**.  Last day to submit with late penalty: 5/05/2025  
+---
 
-## Modify to provide your information.   
+## Overview
 
-* Name :   Eli Webb
-* email :   eli.webb@okstate.edu
-* GitHub user name:   eliwebb11
+This exercise applies several numerical integration methods — trapezoidal rule, Romberg integration, Simpson's rule, and SciPy's adaptive quadrature — to three different problems, comparing accuracy and efficiency across approaches.
 
-## Instructions  
+---
 
-See exercise7.pdf on canvas or in this repository.   
+## Files
 
-You may answer each question in a separate python file or place them all in one script.
-Submit your solution by committing and pushing your code to your GitHub Classroom assignment repository. If you use juypter,
-be sure to pair your jupyter notebook with the python file. We will use the python file for grading.
+| File | Description |
+|------|-------------|
+| `exercise7.py` | Main script containing all three questions |
+| `ex7q1plot.pdf` | Plot of `f(x) = e^(-x²)` over [0, 1] |
+| `ex7q2plot.pdf` | Plot of the oscillatory function for Question 2 |
+| `ex7q3plot.pdf` | Pressure vs. Volume data plot for Question 3 |
 
-**The python file will be graded**, so make sure it is up to date.  Don't forget to add your plots and any newly created python files to your repository.
+---
 
-## Notes and comments
+## Requirements
 
-## This is a clone of the Base Exercise 6 Repository, modified for Exercise 7
+- Python 3
+- NumPy, SciPy, Matplotlib
 
-Contains .gitignore file for python from https://github.com/github/gitignore/blob/main/Python.gitignore
-and for MS Visual Studio from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore 
+```bash
+pip install numpy scipy matplotlib
+```
 
+---
+
+## Running
+
+```bash
+python exercise7.py
+```
+
+---
+
+## Question Summaries
+
+### Question 1 — Integrating e^(-x²) over [0, 1]
+
+The exact value is known analytically via the error function: `erf(1)·√π / 2`.
+
+| Part | Method | Description |
+|------|--------|-------------|
+| (a) | Analytical | Reference value computed from `math.erf` |
+| (b) | Plot | Visualizes `f(x) = e^(-x²)` |
+| (c) | Trapezoidal rule | Applied at 8 refinement levels (n = 1, 2, 4, ..., 128); error printed at each level |
+| (d) | Romberg integration | Richardson extrapolation table built from trapezoidal estimates; diagonal entries `R[i][i]` shown with errors |
+| (e) | `scipy.integrate.quad` | Adaptive quadrature estimate and error vs. exact value |
+| (f) | Function call count | Compares total evaluations for `quad` vs. Romberg (255 for 8 levels) |
+
+---
+
+### Question 2 — Integrating an Oscillatory Function over [1.5, 4]
+
+Integrates `f(x) = (200 / (2x³ - x²)) · (5·sin(20/x))²`, a rapidly oscillating function. The `quad` result is used as the reference since no closed-form exists.
+
+| Part | Method |
+|------|--------|
+| (a) | Plot of `f(x)` over [1.5, 4] |
+| (b) | `scipy.integrate.quad` — adaptive quadrature with error estimate |
+| (c) | Trapezoidal rule at 8 refinement levels; error relative to `quad` |
+| (d) | Romberg table built from trapezoidal estimates; diagonal shown with errors |
+
+The oscillatory nature of this function makes fixed-grid methods converge slowly compared to adaptive quadrature.
+
+---
+
+### Question 3 — Work from Pressure-Volume Data
+
+Integrates tabular pressure-volume data (9 data points, `v` from 0.75 to 2.75 cubic inches) to estimate mechanical work in inch-pounds.
+
+| Part | Method |
+|------|--------|
+| (a) | Plot of P vs. V with styled markers |
+| (b) | `scipy.integrate.trapezoid` |
+| (c) | `scipy.integrate.simpson` |
+| (d) | `scipy.integrate.romb` with full table output |
+| (e) | Discussion — Simpson is preferred over Romberg for this dataset because its quadratic approximation better captures the curvature of the P-V relationship, and it is better suited to small, evenly-spaced datasets |
+
+---
